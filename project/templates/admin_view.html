@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Feedback Details</title>
+</head>
+<body>
+
+<h2>Feedback for {{ student_id }}</h2>
+
+<table border="1">
+
+<tr>
+    <th>Giver ID</th>
+    <th>Rating</th>
+    <th>Comment</th>
+</tr>
+
+{% for row in data %}
+
+<tr>
+    <td>{{ row[0] }}</td>
+    <td>{{ row[1] }}</td>
+    <td>{{ row[2] }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/admin">Back</a>
+
+</body>
+</html>

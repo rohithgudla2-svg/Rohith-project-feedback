@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<h2>Admin Dashboard</h2>
+
+<table border="1">
+
+<tr>
+    <th>Student ID</th>
+    <th>Total Feedback</th>
+    <th>Average Rating</th>
+    <th>Action</th>
+</tr>
+
+{% for row in results %}
+
+<tr>
+    <td>{{ row[0] }}</td>
+    <td>{{ row[1] }}</td>
+    <td>{{ row[2] }}</td>
+    <td>
+        <a href="/admin-view/{{ row[0] }}">View Details</a>
+    </td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/admin-logout">Logout</a>
+
+</body>
+</html>

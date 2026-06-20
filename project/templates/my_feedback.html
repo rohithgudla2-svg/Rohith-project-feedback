@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Feedback</title>
+</head>
+<body>
+
+<h2>My Feedback</h2>
+
+{% if feedbacks %}
+
+<table border="1">
+
+<tr>
+    <th>Rating</th>
+    <th>Comment</th>
+</tr>
+
+{% for feedback in feedbacks %}
+
+<tr>
+    <td>{{ feedback[0] }}</td>
+    <td>{{ feedback[1] }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% else %}
+
+<p>No feedback received yet.</p>
+
+{% endif %}
+
+<br>
+
+<a href="/dashboard">Back</a>
+
+</body>
+</html>
