@@ -1,5 +1,8 @@
 from flask import Flask, render_template, request, redirect, session
 import sqlite3
+import os
+BASE_DIR=os.path.dirname(os.path.abspath(__file__))
+db_path=os.path.join(BASE_DIR,"feedback.db")
 
 app = Flask(__name__)
 app.secret_key = "feedback_secret_key"
@@ -17,7 +20,7 @@ def check():
     student_id = request.form['student_id']
     password = request.form['password']
 
-    conn = sqlite3.connect('feedback.db', check_same_thread=False)
+    conn = sqlite3.connect(db_path, check_same_thread=False)
 
     c = conn.cursor()
 
@@ -54,7 +57,7 @@ def give_feedback():
     if 'student_id' not in session:
         return redirect('/')
 
-    conn = sqlite3.connect('feedback.db')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
     c.execute("SELECT student_id, name FROM students")
@@ -79,7 +82,7 @@ def submit_feedback():
     if giver_id == receiver_id:
         return "You cannot give feedback to yourself."
 
-    conn = sqlite3.connect('feedback.db')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
     c.execute(
@@ -109,7 +112,7 @@ def my_feedback():
     if 'student_id' not in session:
         return redirect('/')
 
-    conn = sqlite3.connect('feedback.db')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
     c.execute("""
@@ -136,7 +139,7 @@ def change_password():
         old_password = request.form['old_password']
         new_password = request.form['new_password']
 
-        conn = sqlite3.connect('feedback.db')
+        conn = sqlite3.connect(db_path)
         c = conn.cursor()
 
         c.execute("""
@@ -176,7 +179,7 @@ def admin_check():
     username = request.form['username']
     password = request.form['password']
 
-    if username == "admin" and password == "admin123":
+    if username == "rohith" and password == "rohith9550":
         session['admin'] = True
         return redirect('/admin')
 
@@ -190,7 +193,7 @@ def admin():
     if 'admin' not in session:
         return redirect('/admin-login')
 
-    conn = sqlite3.connect('feedback.db')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
     c.execute("""
@@ -214,7 +217,7 @@ def admin_view(student_id):
     if 'admin' not in session:
         return redirect('/admin-login')
 
-    conn = sqlite3.connect('feedback.db')
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
     c.execute("""
